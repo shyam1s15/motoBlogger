@@ -75,7 +75,9 @@
     .mcq-submit-btn{
         float: right;
     }
-
+    .no-close .ui-dialog-titlebar-close {
+        display: none;
+    }
 </style>
 
 @section('content')
@@ -132,6 +134,7 @@
                     {{ $index+1 }} : 
                     {{ $post->mcqs[0]->mcqQuestion }}
                     <button type="button" class="btn btn-primary py-0" id="mcq-btn" value="{{ $post->mcqs[0]->mcq_id }},{{$index+1}}" name="mcq-btnName">Submit Answer</button>
+                    {{-- <button type="button" class="btn btn-primary py-0" id="dialog" value="" name="" >Comments</button>                     --}}
                     <br> 
                 </div>
                 <ul class="no-li-dots">
@@ -184,6 +187,8 @@
 
 <script>
     $(document).ready(function(){
+           
+
         //our basic idea is to call a function as soon the document is ready
         //it should call a function which shows user join btn about,
         // that whether he is joinined or not, so a new ajax request,
@@ -277,6 +282,11 @@
                 });
         });
     });
+</script>
+
+<script>
+    
+
 </script>
 {{--  scripts section is now ended  --}}
 @endsection
