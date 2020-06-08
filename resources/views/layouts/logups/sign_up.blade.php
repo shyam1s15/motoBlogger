@@ -13,7 +13,7 @@
       @if (\Session::has('user_exists'))
         <h2> {{ \Session::get('user_exists') }} </h2>
       @endif
-        <form autocomplete="off" action="/sign_up_users" method="post">
+        <form autocomplete="off" action="{{ env('APP_URL') }}/sign_up_users" method="post">
             {{ csrf_field() }}
             <div class="form-row">
               <div class="form-group col-md-6">
