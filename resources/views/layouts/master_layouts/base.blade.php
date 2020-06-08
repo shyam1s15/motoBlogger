@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel = "icon" href =  {{ asset('/imgs/class_logo.png') }}
-            type = "image/x-icon"> 
+            type = "image/x-icon">
 
     <title> Easy Studies </title>
 
@@ -81,7 +81,7 @@ span{
 .uname{
   bottom: 0;
   font-size: 15px;
-  
+
 }
 .btn-theme{
   margin-left: 20px;
@@ -90,7 +90,7 @@ span{
   height: 100%;
 }
 .inp-search{
-  display: block; 
+  display: block;
   width: 500px;
   margin-left: 50px;
 }
@@ -101,7 +101,7 @@ span{
 }
 .just-stick-here>*{
   {{-- z-index: 0; --}}
-  
+
 }
 </style>
 </head>
@@ -113,51 +113,51 @@ span{
   @yield('sidebar')
 
   @if (Session::has('logged_user'))
-    <a href="#" class="uname"><h3 class="uname">{{ Session::get('logged_user') }}</h3></a>    
+    <a href="#" class="uname"><h3 class="uname">{{ Session::get('logged_user') }}</h3></a>
   @endif
-  <a href="/boat/show">Joined clans</a>
+  <a href="{{ env('APP_URL') }}/boat/show">Joined clans</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Profile</a>
   @if (Session::has('logged_user'))
     {{-- {{ Session }} --}}
-    <a href="/logout" id="logout">Log Out</a>
+    <a href="{{ env('APP_URL') }}/logout" id="logout">Log Out</a>
   @else
-    <a href="/login_users" id="login">login</a>
-    <a href="/sign_up_users" id="signup">Sign up</a>  
+    <a href="{{ env('APP_URL') }}/login_users" id="login">login</a>
+    <a href="{{ env('APP_URL') }}/sign_up_users" id="signup">Sign up</a>
   @endif
   <button class="btn-theme" onclick="changeTheme()">change theme</button>
-  
+
 </div>
 
 {{--  <br>  --}}
 <div class="container-fluid just-stick-here">
   <div class="row nopadding">
-      
-      <div class="col-md-2">
+
+      <div class="col-md-2 col-sm-12">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; suit Up</span>
         {{-- the below form is created to go inside active clan --}}
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 previous">
           <form action="#" method="get" class="inline">
             <button type="submit" class="btn btn-light" style="width:100%">Clan: Light</button>
           </form>
       </div>
-        
+
       {{--  <!-- Search form -->  --}}
       <div class="form-group mb-3 col-md-6">
-        <form action="/search" method="get">
-          <div class="input-group"> 
+        <form action="{{ env('APP_URL') }}/search" method="get">
+          <div class="input-group">
             <input type="text" class="form-control" name="seach-bar" placeholder="(#boat, @user)" aria-label="Recipient's username" aria-describedby="button-addon2">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">&#128269; Search</button>
               </div>
           </div>
         </form>
-      </div>      
+      </div>
       {{-- The form btn will redirect to create page --}}
       <div class="col-md-2">
-            <form action="/boat/create" method="get">
+            <form action="{{ env('APP_URL') }}/boat/create" method="get">
                   <button type="submit" class="btn btn-danger" style="width:100%">&#10084; create boat</button>
             </form>
       </div>
@@ -171,7 +171,7 @@ span{
     {{-- the below line of code used to make display color full height --}}
     <div class="test-cover-100" style="height: 100vh"></div>
   </main>
-  
+
 @yield('scripts')
 <script>
   var w_theme = 0;
@@ -207,7 +207,6 @@ function changeTheme(){
 }
 
 </script>
-   
+
 </body>
-</html> 
-                                                                                    
+</html>

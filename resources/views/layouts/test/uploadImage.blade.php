@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/test/image" method="post" enctype="multipart/form-data">
+    <form action="{{ env('APP_URL') }}/test/image" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
     </form>
 </body>
