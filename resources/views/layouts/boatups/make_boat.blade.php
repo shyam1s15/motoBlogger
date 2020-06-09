@@ -1,4 +1,4 @@
-@extends('layouts.master_layouts.base') 
+@extends('layouts.master_layouts.base')
 <style>
     .box{
         margin-left: 350px;
@@ -18,7 +18,7 @@
         @if (session()->has('boatExists'))
             <h1>{{ session()->get('boatExists') }}</h1>
         @endif
-        <form autocomplete="off" action="/boat/create" method="post">
+        <form autocomplete="off" action="{{ env('APP_URL') }}/boat/create" method="post">
             {{ csrf_field() }}
             <div class="form-row">
               <div class="form-group col-md-6">
