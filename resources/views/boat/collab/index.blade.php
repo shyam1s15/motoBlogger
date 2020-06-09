@@ -1,4 +1,4 @@
-@extends('layouts.master_layouts.base') 
+@extends('layouts.master_layouts.base')
 
 <style>
     .no-li-dots{
@@ -15,11 +15,11 @@
     .mcq-inputs::placeholder{
         text-align: center;
     }
-    
+
     .content-btn-submit{
         margin-left: 20px;
     }
-    
+
     .full-width{
         width: 100%;
         margin-bottom: 10px;
@@ -42,7 +42,7 @@
         <div class="col-md-4">
             <ul class="mcqs mcq-content">
                 <li class="no-li-dots-main">
-                    <input type="text" class="form-control mcq-content mcq-question" id="exampleFormControlInput1" placeholder="Enter Your question Here" required> 
+                    <input type="text" class="form-control mcq-content mcq-question" id="exampleFormControlInput1" placeholder="Enter Your question Here" required>
                 </li>
 
                 <li class="no-li-dots">
@@ -110,19 +110,19 @@
         })
 
         $(".no-li-dots-main").hover(function(){
-            $(".no-li-dots").hide(1000);               
+            $(".no-li-dots").hide(1000);
         });
         $(".no-li-dots-main").mouseleave(function(){
-            $(".no-li-dots").show(1000);               
+            $(".no-li-dots").show(1000);
         });
-        
+
         $("#mcq-btn-success").click(function (){
             if(checkValidateMcq()){
                 sendAjaxMcqReq();
             }else{
                 alert("Please Give Correct Mcq to other members");
             }
-        }); 
+        });
 
         function checkValidateMcq(){
             if($(".mcq-inputs").val()){
@@ -138,19 +138,19 @@
             var mcq_inputs = [];
             //we have got mcq inputs here
             $.each($(".mcq-inputs"),function(index){
-                mcq_inputs[index] = $(this).val(); 
+                mcq_inputs[index] = $(this).val();
             });
 
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8000/ajax/make/mcq',
+                url: '{{ env("APP_URL") }}/ajax/make/mcq',
                 data: {
                     mcqQuestion: mcq_question,
                     originalAns: mcq_inputs[original_ans-1],
                     mcqInputs: mcq_inputs,
                     boatId: {{ $bId }},
                     stuId: {{ $stu_id }},
-                }, 
+                },
                 success: function(response){ alert(response.res); },
                 error: function(error_msg){ alert(error_msg); }
             }).done(function(){
