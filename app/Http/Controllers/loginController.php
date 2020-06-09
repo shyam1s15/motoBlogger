@@ -35,7 +35,7 @@ class loginController extends Controller
             'body' => 'Dear User please click below link to confirm your registation,
                         if you believe this is not done by you please ignore it thankyou
                         for your time and attention',
-            'link'=> "{{ env('APP_URL)' }}/checkMail?mail=". $email . '&pass=' . $hashpass ,
+            'link'=> "{{ env('APP_URL') }}/checkMail?mail=". $email . '&pass=' . $hashpass ,
         ];
 
         \Mail::to($email)->send(new \App\Mail\SendMailable($details));
