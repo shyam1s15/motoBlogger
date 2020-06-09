@@ -1,4 +1,4 @@
-@extends('layouts.master_layouts.base') 
+@extends('layouts.master_layouts.base')
 <style>
 
     .boatHeader{
@@ -7,7 +7,7 @@
     .boat-info{
         border: 3px solid cyan;
         padding-top: 30px;
-        border-radius: 12%;   
+        border-radius: 12%;
     }
     .content-page{
         display: flex;
@@ -33,7 +33,7 @@
         width: 100px;
         margin-right: 10px;
     }
-    
+
     .total-mem{
         font-size: 20px;
     }
@@ -64,14 +64,14 @@
     }
     .mcq-option1, .mcq-option2, .mcq-option3, .mcq-option4{
         border: 2px dotted burlywood;
-        border-radius: 20px; 
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
+        border-radius: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .mcq-question{
         text-transform: capitalize;
         font-family: fantasy;
     }
-    
+
     .mcq-submit-btn{
         float: right;
     }
@@ -89,13 +89,13 @@
             <h1>{{ $boat->boat_name }}</h1>
             <div class="boat-add-content-btn">
                 <a href="{{ url('/posts/test/'. $boat->boat_name . '/' . $boat->boat_id) }}">
-                    <button class="btn btn-success addCont-btn" id="addContBtn">Play & collabrate</button>    
+                    <button class="btn btn-success addCont-btn" id="addContBtn">Play & collabrate</button>
                 </a>
-            </div>            
-            
+            </div>
+
             <h4>level : {{ $boat->boat_level }}</h4>
             <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, facere ad non ab quam beatae culpa ratione quidem nam perspiciatis ipsum saepe eligendi, reiciendis eaque consequuntur tempore? Repellendus, accusantium aliquid.</h6>
-            
+
         </div>
     </div>
 </section>
@@ -111,12 +111,12 @@
             Boat-Members:
         </div>
         @foreach ($students as $stu)
-        
+
         <a href="{{ URL('/student/name/'.$stu->stu_name . '/' . $stu->s_id) }}">
             <div class="members">
                 {{ $stu->email }}
-            </div>         
-        </a>   
+            </div>
+        </a>
         @endforeach
     </div>
 
@@ -125,17 +125,17 @@
         {{-- {{ dd($posts->count() == 0) }} --}}
         @if ( $posts->count()  === 0)
            <div class="content-posts">
-                No posts to show 
+                No posts to show
            </div>
         @else
             @foreach ($posts as $index=>$post)
-                
+
                 <div class="mcq-question">
-                    {{ $index+1 }} : 
+                    {{ $index+1 }} :
                     {{ $post->mcqs[0]->mcqQuestion }}
                     <button type="button" class="btn btn-primary py-0" id="mcq-btn" value="{{ $post->mcqs[0]->mcq_id }},{{$index+1}}" name="mcq-btnName">Submit Answer</button>
                     {{-- <button type="button" class="btn btn-primary py-0" id="dialog" value="" name="" >Comments</button>                     --}}
-                    <br> 
+                    <br>
                 </div>
                 <ul class="no-li-dots">
                     <div class="mcq-options">
@@ -145,7 +145,7 @@
                                 {{ $post->mcqs[0]->option1 }} <br>
                             </div>
                         </li>
-                        
+
                         @if ($post->mcqs[0]->option2)
                             <li>
                                 <div class="mcq-option2">
@@ -160,7 +160,7 @@
                                     <input class="form-check-input" type="radio" name="exampleRadios{{$index+1}}" id="exampleRadios2" value="3" checked>
                                     {{ $post->mcqs[0]->option3 }} <br>
                                 </div>
-                            </li>    
+                            </li>
                         @endif
                         @if ($post->mcqs[0]->option4)
                             <li>
@@ -168,16 +168,16 @@
                                     <input class="form-check-input" type="radio" name="exampleRadios{{$index+1}}" id="exampleRadios2" value="4" checked>
                                     {{ $post->mcqs[0]->option4 }}  <br>
                                 </div>
-                            </li>    
+                            </li>
                         @endif
                     </div>
                 </ul>
                 <br>
             @endforeach
-        @endif 
+        @endif
     </div>
-        
-</section>    
+
+</section>
 {{--  </div>  --}}
 {{--  base content section is now ended  --}}
 
@@ -187,7 +187,7 @@
 
 <script>
     $(document).ready(function(){
-           
+
 
         //our basic idea is to call a function as soon the document is ready
         //it should call a function which shows user join btn about,
@@ -196,10 +196,10 @@
 
         $.ajax({
             type: 'GET',
-                url: 'http://localhost:8000/test/ajaxReq/knowJoinOrLeave',
+                url: "{{ env('APP_URL') }}/test/ajaxReq/knowJoinOrLeave",
                 data:  { boat_id : '{{ $boat->boat_id }}' },
                 success: function(response){
-                    if(response.isMember == "true"){ 
+                    if(response.isMember == "true"){
                         $("#joinBtn").html("leave")
                             .attr('class','btn btn-warning join-btn');
                     }else{
@@ -208,7 +208,7 @@
                     }
                 },
                 error: function(){ alert("something is wrong"); }
-                
+
             }).done(function(data){
                 //do something here
             });
@@ -218,13 +218,13 @@
         $("#joinBtn").click(function(){
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8000/test/ajaxReq/joinOrLeave',
+                url: "{{ env('APP_URL') }}/test/ajaxReq/joinOrLeave",
                 data:  { boat_id : '{{ $boat->boat_id }}' },
                 success: function(response){
                     joinOrLeave(response.isMember);
                 },
                 error: function(){ alert("something is wrong") }
-                
+
             }).done(function(data){
                 //do something here
             });
@@ -235,15 +235,15 @@
                 $('#joinBtn').html("Leave")
                     .attr('class','btn btn-warning join-btn');
                     swal("Congrats!", ", You are now member of {{ $boat->boat_name }}!", "success");
-            }else{   
+            }else{
                 $('#joinBtn').html("Join")
                     .attr('class','btn btn-success join-btn');
                 swal("Congrats!", ", You Have Left {{ $boat->boat_name }}", "warning");
             }
         };
-        
+
     });
-    
+
     {{--  nam vagar nu function banavyu and anne direct call karyu ()();  --}}
 </script>
 
@@ -261,22 +261,22 @@
             {{-- alert( $("input[name=" + whichRadio + "]:checked").val() ); --}}
             $.ajax({
                 type: 'GET',
-                    url: 'http://localhost:8000/test/ajaxReq/ResponsedAnswer',
-                    data:  { 
+                    url: "{{ env('APP_URL') }}/test/ajaxReq/ResponsedAnswer",
+                    data:  {
                                 bId : '{{ $boat->boat_id }}',
                                 mcqId : whichQuestionArray[0],
                                 stuId : '{{ $logged_stu_id }}',
                                 mcqAns : ans_index
                             },
                     success: function(response){
-                        if(response.isMember == "true"){ 
+                        if(response.isMember == "true"){
                                 alert("yeas");
                         }else{
                             alert("nope");
                         }
                     },
                     error: function(){ alert("something is wrong"); }
-                    
+
                 }).done(function(data){
                     //do something here
                 });
@@ -285,7 +285,7 @@
 </script>
 
 <script>
-    
+
 
 </script>
 {{--  scripts section is now ended  --}}
