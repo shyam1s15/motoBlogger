@@ -35,7 +35,7 @@ class loginController extends Controller
             'body' => 'Dear User please click below link to confirm your registation,
                         if you believe this is not done by you please ignore it thankyou
                         for your time and attention',
-            'link'=> "{{ env('APP_URL') }}/checkMail?mail=". $email . '&pass=' . $hashpass ,
+            'link'=>  env('APP_URL') ."/checkMail?mail=". $email . '&pass=' . $hashpass ,
         ];
 
         \Mail::to($email)->send(new \App\Mail\SendMailable($details));
@@ -146,7 +146,7 @@ class loginController extends Controller
         $details = [
             'title' => 'Forgot password',
             'body' => 'be my friend u will be in profit, be my enemy i will get much profit',
-            'link'=> "{{ env('APP_URL') }}/forgotPassMail?mail=". $email . '&pass=' . $hashEmail ,
+            'link'=> env('APP_URL') . "/forgotPassMail?mail=". $email . '&pass=' . $hashEmail ,
         ];
         \Mail::to($email)->send(new \App\Mail\SendMailable($details));
         return view('layouts.logups.result_of_signup_login',['result'=>"checkMail for pass"]);
