@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
-        "guzzlehttp/guzzle": "^6.5",
+        "guzzlehttp/guzzle": "^7.4",
         "illuminate/support": "^6.8",
         "jeroennoten/laravel-adminlte": "^3.0",
         "laravel/framework": "^6.2",
